@@ -18,8 +18,9 @@ mongoose
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.get("/dog", (req, res) => {
-  res.send("WOOF");
+app.get("/Products", async (req, res) => {
+  const products = await Product.find({});
+  res.render("products/index", { products });
 });
 
 app.listen(3000, () => {
