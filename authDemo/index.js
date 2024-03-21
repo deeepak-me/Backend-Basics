@@ -52,11 +52,17 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/logout", (req, res) => {
+  //req.session.user_id = null;
+  req.session.destroy();
+  res.redirect("/login");
+});
+
 app.get("/secret", (req, res) => {
   if (!req.session.user_id) {
-    res.redirect("/login");
+    return res.redirect("/login");
   }
-  res.send("THIS IS SECRET! YOU CANNOT SEE THIS UNTIL YOU GET LOGGED IN");
+  res.render("secret");
 });
 app.listen(3030, () => {
   console.log("SERVING ON PORT 3030");
